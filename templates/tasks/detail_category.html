@@ -6,6 +6,13 @@
 
 {% block content %}
 <h2 class="teal-text">
-    Detail Category
+    Detail Category - {{ category.name }}
 </h2>
+
+    <div class="container">
+        <p>
+            {{ category.description }}
+        </p>
+        <img src="{{ category.category_image.url }}" alt="Image not available" height="400" width="400">
+    </div>
 {% endblock %}

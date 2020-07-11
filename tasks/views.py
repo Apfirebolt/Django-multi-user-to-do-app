@@ -3,7 +3,7 @@ from django.views.generic import FormView, DetailView, DeleteView, UpdateView, L
 from . models import Task, Category
 from . forms import CreateCategoryForm, CreateTaskForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import reverse
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 # CRUD functionality for tasks
 
@@ -20,7 +20,8 @@ class CreateTask(LoginRequiredMixin, FormView):
 
 
 class UpdateTask(UpdateView):
-  pass
+  model = Task
+  fields = ['name', 'description', 'category', 'priority', 'deadline_date']
 
 
 class DeleteTask(DeleteView):
@@ -50,11 +51,20 @@ class CreateCategory(LoginRequiredMixin, FormView):
 
 
 class UpdateCategory(UpdateView):
-  pass
+  model = Category
+  fields = ['name', 'description', 'category_image']
+  context_object_name = 'category'
+  template_name = 'tasks/update_category.html'
+
+  def get_success_url(self):
+    return reverse_lazy('accounts:list_category')
 
 
 class DeleteCategory(DeleteView):
-  pass
+  model = Category
+  success_url = reverse_lazy('accounts:list_category')
+  template_name = 'tasks/delete_category.html'
+  context_object_name = 'category'
 
 
 class ListCategory(ListView):
@@ -64,6 +74,8 @@ class ListCategory(ListView):
 
 
 class DetailCategory(DetailView):
-  pass
+  model = Category
+  context_object_name = 'category'
+  template_name = 'tasks/detail_category.html'
 
 

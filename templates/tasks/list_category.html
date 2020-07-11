@@ -21,9 +21,9 @@
                 {{ each_category.description }}
             </p>
             <div class="container">
-                <a class="btn button red">Delete</a>
-                <a class="btn button yellow">Update Category</a>
-                <a class="btn button blue">View Details</a>
+                <a href="{% url 'accounts:update_category' pk=each_category.pk %}" class="btn button yellow">Update Category</a>
+                <a href="{% url 'accounts:detail_category' pk=each_category.pk %}" class="btn button blue">View Details</a>
+                <a href="{% url 'accounts:delete_category' pk=each_category.pk %}" class="btn button red">Delete</a>
                 <a class="btn button green">View Tasks</a>
             </div>
             <img src="{{ each_category.category_image.url }}" alt="Image not available" height="400" width="400">

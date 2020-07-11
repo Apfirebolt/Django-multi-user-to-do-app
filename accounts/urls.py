@@ -15,7 +15,11 @@ urlpatterns = [
     path('create_task', CreateTask.as_view(), name='create_task'),
     path('list_task', ListTask.as_view(), name='list_task'),
     path('detail_task', DetailTask.as_view(), name='detail_task'),
+    path('update_task/<int:pk>', UpdateTask.as_view(), name='update_task'),
+    path('delete_task/<int:pk>', DeleteTask.as_view(), name='delete_task'),
     path('list_category', ListCategory.as_view(), name='list_category'),
     path('create_category', CreateCategory.as_view(), name='create_category'),
     path('detail_category/<int:pk>', DetailCategory.as_view(), name='detail_category'),
+    path('update_category/<int:pk>', UpdateCategory.as_view(), name='update_category'),
+    path('delete_category/<int:pk>', DeleteCategory.as_view(), name='delete_category'),
 ]

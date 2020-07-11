@@ -8,4 +8,19 @@
 <h2 class="teal-text">
     Update Category
 </h2>
+
+<form action="#" method="post" class="row" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+      <div class="input-field col s6">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+        {{ field }}
+        {% for error in field.errors %}
+          <span class="help-block">{{ error }}</span>
+        {% endfor %}
+      </div>
+    {% endfor %}
+<input type="submit" value="Submit" class="button btn green">
+</form>
 {% endblock %}

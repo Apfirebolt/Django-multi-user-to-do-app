@@ -19,8 +19,10 @@ class RegisterUser(FormView):
 
   def form_valid(self, form):
     # perform a action here
-    print(form.cleaned_data)
-    form.save()
+    userObj = form.save(commit=False)
+    userObj.staff = False
+    userObj.admin = False
+    userObj.save()
     messages.add_message(self.request, messages.INFO, 'You have successfully registered, Please login to continue!')
     return HttpResponseRedirect(reverse('accounts:login'))
 
@@ -32,7 +34,6 @@ class LoginView(View):
     password = request.POST['password']
     print(email, password)
     user = authenticate(username=email, password=password)
-    print('User : ', user)
     if user is not None:
       messages.add_message(self.request, messages.INFO, 'You have successfully logged in! Please continue to your dashboard!')
       login(request, user)
