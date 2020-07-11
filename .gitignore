@@ -6,6 +6,7 @@
 # dependencies
 /node_modules
 /media
+db.sqlite3
 
 # testing
 /coverage
