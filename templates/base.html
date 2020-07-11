@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.min.css' %}">
+    <script src="{% static 'js/materialize.js' %}"></script>
+</head>
+<body>
+<nav>
+<div class="nav-wrapper">
+  <a href="#" class="brand-logo">Task Management</a>
+  <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <li><a href="sass.html">Home</a></li>
+    <li><a href="badges.html">Tasks</a></li>
+    <li><a href="collapsible.html">Logout</a></li>
+  </ul>
+</div>
+</nav>
+{%  block content %}
+    <h2>Base file contents</h2>
+{% endblock %}
+<footer>
+    <p class="teal-text">Copyright@ Task Management Application 2020</p>
+</footer>
+</body>
+</html>
