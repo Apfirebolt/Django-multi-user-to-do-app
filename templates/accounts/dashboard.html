@@ -6,6 +6,13 @@
 
 {% block content %}
 <h2 class="red-text">
-    Dashboard Page
+    Dashboard Page - {{ request.user }}
 </h2>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="center red-text {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
 {% endblock %}

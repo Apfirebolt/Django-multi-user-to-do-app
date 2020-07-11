@@ -8,13 +8,18 @@
 <h2 class="teal-text">
     Login Page
 </h2>
+{% if messages %}
+    {% for message in messages %}
+        <div class="center red-text {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+{% endif %}
 
 <form action="#" method="post" class="col s12">
   {% csrf_token %}
   <div class="row">
     <div class="input-field col s6">
       <input placeholder="Email" id="email" name="email" type="text" class="validate">
-      <label for="first_name">Enter Your Email</label>
+      <label for="first_name">Enter Your Email {{ request.user }}</label>
     </div>
     <div class="input-field col s6">
       <input id="password" type="password" name="password" class="validate">

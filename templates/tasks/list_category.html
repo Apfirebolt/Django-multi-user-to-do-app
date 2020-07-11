@@ -8,6 +8,12 @@
 <h2 class="teal-text">
     List Category
 </h2>
+{% if messages %}
+    {% for message in messages %}
+        <div class="center green-text {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
     {% for each_category in all_categories %}
         <div>
         <h2>{{ each_category.name }}</h2>

@@ -10,6 +10,12 @@
     Register Page
 </h2>
 
+{% if messages %}
+    {% for message in messages %}
+        <div class="center red-text {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
 <form action="#" method="post" class="row">
     {% csrf_token %}
     {% for field in form.visible_fields %}
