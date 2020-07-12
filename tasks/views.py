@@ -5,6 +5,7 @@ from . forms import CreateCategoryForm, CreateTaskForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 # CRUD functionality for tasks
 
 
@@ -65,6 +66,11 @@ class DeleteCategory(DeleteView):
   success_url = reverse_lazy('accounts:list_category')
   template_name = 'tasks/delete_category.html'
   context_object_name = 'category'
+  success_message = "Category was successfully deleted!"
+
+  def delete(self, request, *args, **kwargs):
+    messages.success(self.request, self.success_message)
+    return super(DeleteCategory, self).delete(request, *args, **kwargs)
 
 
 class ListCategory(ListView):

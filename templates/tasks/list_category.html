@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block content %}
-<h2 class="teal-text">
-    List Category
+<h2 class="teal-text center">
+    All Categories
 </h2>
 {% if messages %}
     {% for message in messages %}
@@ -15,7 +15,7 @@
 {% endif %}
 
     {% for each_category in all_categories %}
-        <div>
+        <div class="card">
         <h2>{{ each_category.name }}</h2>
             <p>
                 {{ each_category.description }}

@@ -6,8 +6,6 @@ from django.shortcuts import reverse
 from django.views.generic import FormView, ListView, UpdateView, View
 from . forms import UserRegistrationForm
 from django.contrib.auth import authenticate
-from django.contrib.auth import get_user_model
-from django.contrib.auth.backends import ModelBackend
 from . models import CustomUser
 from django.contrib import messages
 
