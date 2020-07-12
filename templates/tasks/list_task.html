@@ -8,6 +8,13 @@
 <h3 class="orange-text center">
     List of Tasks
 </h3>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="center green-text {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
     {% for each_task in all_tasks %}
         <div class="card-container">
             <h4 class="grey-text center">{{ each_task.name }}</h4>

@@ -9,7 +9,7 @@
     Delete Category
 </h3>
 
-<form method="post" class="form-container">{% csrf_token %}
+<form method="post" class="delete-container">{% csrf_token %}
     <p>Are you sure you want to delete "{{ category.name }}"?</p>
     <input type="submit" value="Confirm" class="button btn red">
 </form>

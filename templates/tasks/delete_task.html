@@ -9,7 +9,7 @@
     Delete Task
 </h3>
 
-<form method="post" class="form-container">{% csrf_token %}
+<form method="post" class="delete-container">{% csrf_token %}
     <p>Are you sure you want to delete the task "{{ task.name }}"?</p>
     <input type="submit" value="Confirm" class="button btn red">
 </form>

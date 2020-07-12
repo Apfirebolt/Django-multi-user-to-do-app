@@ -1,14 +1,28 @@
+body {
+    background-color: azure;
+
+}
+
 .form-container {
     width: 80%;
     margin: 1rem auto;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #2c2830;
+    background-color: #FFF;
+    padding: 1rem;
 }
 
 .card-container {
     padding: 1rem;
     width: 80%;
     margin: 1rem auto;
-    background-color: mintcream;
+    background-color: white;
     box-shadow: 2px 2px 2px #FFF;
+}
+
+.card-container .para-text {
+    white-space: pre-line;
 }
 
 .button-container {
@@ -16,5 +30,29 @@
 }
 
 .button-container .button {
-    margin: 0.5rem 1rem;
+    margin-right: 1rem;
+    color: darkslategray;
+    font-weight: 500;
+}
+
+.brand-logo {
+    margin: auto 1rem;
+}
+
+.delete-container {
+    background-color: #FFF;
+    padding: 1rem;
+    width: 80%;
+    margin: 1rem auto;
+    font-size: 1.2rem;
+    color: #f2513f;
+}
+
+.task-container {
+    font-size: 1.2rem;
+    color: #00bfa5;
+    width: 80%;
+    margin: 1rem auto;
+    padding: 1.5rem;
+    background-color: #FFF;
 }
