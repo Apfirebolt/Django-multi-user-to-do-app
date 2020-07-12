@@ -6,9 +6,9 @@
 {% endblock %}
 
 {% block content %}
-<h2 class="teal-text">
-    Register Page
-</h2>
+<h3 class="orange-text center">
+    Register
+</h3>
 
 {% if messages %}
     {% for message in messages %}
@@ -16,13 +16,17 @@
     {% endfor %}
 {% endif %}
 
-<form action="#" method="post" class="row">
+<form action="#" method="post" class="form-container">
     {% csrf_token %}
     {% for field in form.visible_fields %}
       <div class="input-field col s6">
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% if field.label == 'User bio' %}
+            {{ field|add_class:"materialize-textarea" }}
+        {% else %}
+            {{ field|add_class:"" }}
+        {% endif %}
 
-        {{ field }}
         {% for error in field.errors %}
           <span class="help-block">{{ error }}</span>
         {% endfor %}

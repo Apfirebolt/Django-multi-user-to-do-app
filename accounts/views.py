@@ -30,7 +30,6 @@ class LoginView(View):
   def post(self, request):
     email = request.POST['email']
     password = request.POST['password']
-    print(email, password)
     user = authenticate(username=email, password=password)
     if user is not None:
       messages.add_message(self.request, messages.INFO, 'You have successfully logged in! Please continue to your dashboard!')

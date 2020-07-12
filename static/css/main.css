@@ -2,3 +2,19 @@
     width: 80%;
     margin: 1rem auto;
 }
+
+.card-container {
+    padding: 1rem;
+    width: 80%;
+    margin: 1rem auto;
+    background-color: mintcream;
+    box-shadow: 2px 2px 2px #FFF;
+}
+
+.button-container {
+    margin: 1rem auto;
+}
+
+.button-container .button {
+    margin: 0.5rem 1rem;
+}

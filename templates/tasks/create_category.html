@@ -1,26 +1,25 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}
     Create Category
 {% endblock %}
 
 {% block content %}
-<h2 class="teal-text">
+<h3 class="orange-text center">
     Create Category
-</h2>
+</h3>
 
-<form action="#" method="post" class="row" enctype="multipart/form-data">
+<form action="#" method="post" class="form-container" enctype="multipart/form-data">
 {% csrf_token %}
-{% for field in form.visible_fields %}
-  <div class="input-field col s6">
-    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ form.name.label }}
+    {{ form.name }}
 
-    {{ field }}
-    {% for error in field.errors %}
-      <span class="help-block">{{ error }}</span>
-    {% endfor %}
-  </div>
-{% endfor %}
+    {{ form.description.label }}
+    {{ form.description|add_class:"materialize-textarea" }}
+
+    {{ form.category_image.label }}
+    {{ form.category_image|add_class:"validate" }}
 <input type="submit" value="Submit" class="button btn green">
 </form>
 {% endblock %}
