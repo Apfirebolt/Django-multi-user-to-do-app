@@ -1,11 +1,30 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}
     Task Update Page
 {% endblock %}
 
 {% block content %}
-<h2 class="teal-text">
-    Task Update Page
-</h2>
+<h3 class="orange-text center">
+    Update Task
+</h3>
+
+    <form action="" method="post" class="form-container" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.name.label }}
+    {{ form.name }}
+
+    {{ form.description.label }}
+    {{ form.description|add_class:"materialize-textarea" }}
+
+    {{ form.priority.label }}
+    {{ form.priority }}
+
+    {{ form.deadline_date.label }}
+    {{ form.deadline_date|add_class:"datepicker" }}
+
+    <input type="submit" value="Submit" class="button btn green">
+
+</form>
 {% endblock %}

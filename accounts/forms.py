@@ -5,12 +5,15 @@ from . models import CustomUser
 class UserRegistrationForm(forms.ModelForm):
   error_messages = {
     'password_mismatch': ("The two password fields didn't match."),
+    'username_required': ("User name is a required field.")
   }
   password1 = forms.CharField(label=("Password"),
                               widget=forms.PasswordInput)
   password2 = forms.CharField(label=("Password confirmation"),
                               widget=forms.PasswordInput,
                               help_text=("Enter the same password as above, for verification."))
+  user_name = forms.CharField(label=("Please Enter Username"),
+                              widget=forms.TextInput)
 
   class Meta:
     model = CustomUser
@@ -25,6 +28,15 @@ class UserRegistrationForm(forms.ModelForm):
         code='password_mismatch',
       )
     return password2
+
+  def clean_user_name(self):
+    user_name = self.cleaned_data.get('user_name')
+    if not user_name:
+      raise forms.ValidationError(
+        self.error_messages['username_required'],
+        code='username_required'
+      )
+    return user_name
 
   def save(self, commit=True):
     user = super(UserRegistrationForm, self).save(commit=False)

@@ -5,11 +5,16 @@
 {% endblock %}
 
 {% block content %}
-<h2 class="teal-text">
-    Login Page
-</h2>
+<h3 class="orange-text center">
+    Login
+</h3>
+{% if messages %}
+    {% for message in messages %}
+        <div class="center red-text {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+{% endif %}
 
-<form action="#" method="post" class="col s12">
+<form action="#" method="post" class="form-container">
   {% csrf_token %}
   <div class="row">
     <div class="input-field col s6">

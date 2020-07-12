@@ -1,11 +1,26 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}
     Update Category
 {% endblock %}
 
 {% block content %}
-<h2 class="teal-text">
+<h3 class="orange-text center">
     Update Category
-</h2>
+</h3>
+
+<form action="" method="post" class="form-container" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.name.label }}
+    {{ form.name }}
+
+    {{ form.description.label }}
+    {{ form.description|add_class:"materialize-textarea" }}
+
+    {{ form.category_image.label }}
+    {{ form.category_image|add_class:"validate" }}
+<input type="submit" value="Submit" class="button btn green">
+</form>
+
 {% endblock %}

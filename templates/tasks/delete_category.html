@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% block content %}
-<h2 class="teal-text">
+<h3 class="orange-text center">
     Delete Category
-</h2>
+</h3>
+
+<form method="post" class="delete-container">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ category.name }}"?</p>
+    <input type="submit" value="Confirm" class="button btn red">
+</form>
 {% endblock %}

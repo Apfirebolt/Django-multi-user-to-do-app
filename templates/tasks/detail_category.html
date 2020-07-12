@@ -5,7 +5,14 @@
 {% endblock %}
 
 {% block content %}
-<h2 class="teal-text">
-    Detail Category
-</h2>
+<h3 class="orange-text center">
+    Details for Category - {{ category.name }}
+</h3>
+
+    <div class="container">
+        <p>
+            {{ category.description }}
+        </p>
+        <img src="{{ category.category_image.url }}" alt="Image not available" height="400" width="400">
+    </div>
 {% endblock %}

@@ -1,25 +1,55 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}
     Create Task
 {% endblock %}
 
 {% block content %}
-<h2 class="teal-text">
+<h3 class="orange-text center">
     Create Task
-</h2>
-<form action="#" method="post" class="row" enctype="multipart/form-data">
+</h3>
+<form action="" method="post" class="form-container" enctype="multipart/form-data">
     {% csrf_token %}
-    {% for field in form.visible_fields %}
-        <div class="input-field col s6">
-            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
 
-            {{ field }}
-            {% for error in field.errors %}
-                <span class="help-block">{{ error }}</span>
-            {% endfor %}
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Enter the Task Name" id="task_name" name="name" type="text" class="validate">
+          <label for="task_name">Task Name</label>
         </div>
-    {% endfor %}
-<input type="submit" value="Submit" class="button btn green">
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="task_description" name="description" rows="10" cols="20" class="materialize-textarea validate"></textarea>
+          <label for="task_description">Task Description</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="priority" name="priority" type="number" class="validate">
+          <label for="priority">Task Priority</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="date" id="deadline_date" name="deadline_date">
+          <label for="deadline_date">Deadline Date for Task</label>
+        </div>
+      </div>
+
+    <div class="input-field col s12">
+        <select id="category" name="category">
+          <option value="" disabled selected>Choose your task category</option>
+            {% for each_category in categories %}
+                <option value="{{ each_category.name }}">{{ each_category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {{ rows }}
+
+    <input type="submit" value="Submit" class="button btn green">
+
 </form>
+
+
 {% endblock %}

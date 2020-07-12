@@ -5,7 +5,17 @@
 {% endblock %}
 
 {% block content %}
-<h2 class="teal-text">
-    Task Detail Page
-</h2>
+<h3 class="orange-text center">
+    Task Detail
+</h3>
+
+<div class="task-container">
+    <h4 class="grey-text center">{{ task.name }}</h4>
+    <p>
+        {{ task.description }}
+    </p>
+
+    <p>To be completed by {{ task.deadline_date }}</p>
+    <p>Task Priority is {{ task.priority }}</p>
+</div>
 {% endblock %}

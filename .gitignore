@@ -6,7 +6,10 @@
 # dependencies
 /node_modules
 /media
-db.sqlite3
+*.sqlite3
+
+# ignore migrations
+**/migrations/
 
 # testing
 /coverage
