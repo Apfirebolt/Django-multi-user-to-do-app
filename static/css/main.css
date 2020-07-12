@@ -56,3 +56,7 @@ body {
     padding: 1.5rem;
     background-color: #FFF;
 }
+
+p {
+    white-space: pre-line;
+}
