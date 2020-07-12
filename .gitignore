@@ -7,6 +7,9 @@
 /node_modules
 /media
 
+# ignore migrations
+**/migrations/
+
 # testing
 /coverage
 

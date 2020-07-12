@@ -35,7 +35,7 @@
                 <a href="{% url 'accounts:update_category' pk=each_category.pk %}" class="btn button yellow">Update Category</a>
                 <a href="{% url 'accounts:detail_category' pk=each_category.pk %}" class="btn button blue">View Details</a>
                 <a href="{% url 'accounts:delete_category' pk=each_category.pk %}" class="btn button red">Delete</a>
-                <a class="btn button green">View Tasks</a>
+                <a href="{% url 'accounts:category_tasks' pk=each_category.pk %}"class="btn button green">View Tasks</a>
             </div>
         </div>
     {% endfor %}

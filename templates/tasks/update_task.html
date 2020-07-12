@@ -8,4 +8,47 @@
 <h3 class="orange-text center">
     Update Task
 </h3>
+
+    <form action="" method="post" class="form-container" enctype="multipart/form-data">
+    {% csrf_token %}
+      {{ task }}
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="{{ task.name }}" id="task_name" name="name" type="text" class="validate">
+          <label for="task_name">Task Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea value="{{ task.description.value }}" id="task_description" placeholder="{{ task.description }}"
+                    name="description" rows="10" cols="20" class="materialize-textarea validate"></textarea>
+          <label for="task_description">Task Description</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input value="{{ task.priority }}" id="priority" placeholder="{{ task.priority }}" name="priority" type="number" class="validate">
+          <label for="priority">Task Priority</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="date" value="{{ task.deadline_date }}" id="deadline_date" placeholder="{{ task.deadline_date }}" name="deadline_date">
+          <label for="deadline_date">Deadline Date for Task</label>
+        </div>
+      </div>
+
+    <div class="input-field col s12">
+        <select id="category" name="category">
+          <option value="{{ task.category }}" disabled selected>{{ task.category }}</option>
+            {% for each_category in categories %}
+                <option value="{{ each_category.name }}">{{ each_category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {{ rows }}
+
+    <input type="submit" value="Submit" class="button btn green">
+
+</form>
 {% endblock %}
