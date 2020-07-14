@@ -94,7 +94,8 @@ class DeleteFriendRequest(View):
   def post(self, *args, **kwargs):
     try:
       userObj = CustomUser.objects.get(id=self.kwargs['pk'])
-      friendReqObj = FriendRequest.objects.filter(send_from=self.request.user, send_to=userObj).delete()
+      friendReqObjSent = FriendRequest.objects.filter(send_from=self.request.user, send_to=userObj).delete()
+      friendReqObjReceived = FriendRequest.objects.filter(send_from=userObj, send_to=self.request.user).delete()
       messages.add_message(self.request, messages.SUCCESS,
                            'Friend Request to this user with email %s was deleted!' % (userObj.email))
     except Exception as Err:
