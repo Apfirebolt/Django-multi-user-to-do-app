@@ -12,7 +12,7 @@
 
     {% if messages %}
         {% for message in messages %}
-            <div class="center green-text {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+            <div class="center alert-info {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
         {% endfor %}
     {% endif %}
 
@@ -22,6 +22,8 @@
         <a href="{% url 'accounts:create_task' %}" class="collection-item">Add a Task</a>
         <a href="{% url 'accounts:create_category' %}" class="collection-item">Add a Category</a>
     </div>
+
+    <a href="{% url 'accounts:all_users' %}" class="teal-text highlight-link">See all users</a>
 </div>
 
 {% endblock %}

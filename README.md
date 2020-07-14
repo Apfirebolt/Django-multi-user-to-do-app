@@ -18,12 +18,12 @@ file. This project uses Django version 2.2, so just in case you wanted to know. 
 
 * [Django - Progressive Web Framework for Python](https://docs.djangoproject.com/en/3.0/)
 * [Materialize ](https://materializecss.com/)
-* [Sqlite3] (https://www.sqlite.org/index.html)
+* [ Sqlite3 ] (https://www.sqlite.org/index.html)
 * [HTML + CSS + JQuery](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Authors
 
-* **Amit Prafulla (APFirebolt)** - [PurpleBooth](https://github.com/PurpleBooth)
+* **Amit Prafulla (APFirebolt)** - (http://amitprafull.com/)
 
 ## License
 

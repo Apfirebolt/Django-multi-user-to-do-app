@@ -27,3 +27,19 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
       return self.email
+
+
+class FriendRequest(models.Model):
+  send_from = models.ForeignKey(CustomUser, related_name='user_sent_from', on_delete=models.CASCADE)
+  send_to = models.ForeignKey(CustomUser, related_name='user_sent_to', on_delete=models.CASCADE)
+  is_accepted = models.BooleanField(default=False)
+  sent_at = models.DateTimeField(auto_now=True)
+  accepted_at = models.DateTimeField(blank=True, null=True)
+
+  class Meta:
+    verbose_name_plural = "Friend Requests"
+
+  def __str__(self):
+    return str(self.send_from) + '-' + str(self.send_to)
+
+

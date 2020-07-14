@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Add Friend - Confirmation
+{% endblock %}
+
+{% block content %}
+<h3 class="orange-text center">
+    Add Friend - Confirm
+</h3>
+
+<form method="post" class="delete-container">{% csrf_token %}
+    <p>Are you sure you want to send this user with email {{ user.email }} friend request ?</p>
+    <input type="submit" value="Yes, Send Friend Request!" class="button btn cyan">
+</form>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
-from . views import RegisterUser, LoginView
+from . views import RegisterUser, LoginView, DisplayAllUsers, ConfirmFriend, DeleteFriendRequest, AcceptFriendRequest
 import django.contrib.auth.views as AuthViews
 from tasks.views import (CreateTask, DeleteTask, DetailTask, ListTask, UpdateTask, CreateCategory,
                           UpdateCategory, DeleteCategory, DetailCategory, ListCategory, CategoryTasks)
@@ -10,6 +10,10 @@ urlpatterns = [
     path('login', LoginView.as_view(), name='login'),
     path('logout/', AuthViews.LogoutView.as_view(), name='logout'),
     path('register', RegisterUser.as_view(), name='register'),
+    path('all_users', DisplayAllUsers.as_view(), name='all_users'),
+    path('add_friend/<int:pk>', ConfirmFriend.as_view(), name='add_friend'),
+    path('delete_friend_request/<int:pk>', DeleteFriendRequest.as_view(), name='delete_friend_request'),
+    path('accept_friend_request/<int:pk>', AcceptFriendRequest.as_view(), name='accept_friend_request'),
     path('dashboard', TemplateView.as_view(template_name='accounts/dashboard.html'), name='dashboard'),
     path('', TemplateView.as_view(template_name='accounts/accounts_home.html'), name='accounts_home'),
     path('create_task', CreateTask.as_view(), name='create_task'),

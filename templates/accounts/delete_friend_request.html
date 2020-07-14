@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete Friend Request
+{% endblock %}
+
+{% block content %}
+<h3 class="orange-text center">
+    Delete Friend Request - Confirm
+</h3>
+
+<form method="post" class="delete-container">{% csrf_token %}
+    <p>Are you sure you want to delete friend request to this user with email {{ user.email }} ?</p>
+    <input type="submit" value="Yes, Delete Friend Request!" class="button btn red">
+</form>
+{% endblock %}

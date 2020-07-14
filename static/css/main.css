@@ -60,3 +60,36 @@ body {
 p {
     white-space: pre-line;
 }
+
+.user-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.profile-container {
+    background: #FFF;
+    padding: 1rem;
+    height: auto;
+    min-height: 200px;
+    margin: 1rem;
+    width: 25%;
+}
+
+.highlight-link {
+    font-size: 2rem;
+    color: #1d7d74;
+    padding: 1rem;
+    margin: 1rem auto;
+}
+
+.alert-info {
+    background-color: cornflowerblue;
+    padding: 1rem;
+    width: 100%;
+    margin: 1rem auto;
+    font-size: 1.2rem;
+    color: #FFF;
+    font-weight: 500;
+}
