@@ -1,6 +1,7 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
-from . views import RegisterUser, LoginView, DisplayAllUsers, ConfirmFriend, DeleteFriendRequest, AcceptFriendRequest
+from . views import (RegisterUser, LoginView, DisplayAllUsers, ConfirmFriend, DeleteFriendRequest,
+                     AcceptFriendRequest, FriendList, RemoveFriend)
 import django.contrib.auth.views as AuthViews
 from tasks.views import (CreateTask, DeleteTask, DetailTask, ListTask, UpdateTask, CreateCategory,
                           UpdateCategory, DeleteCategory, DetailCategory, ListCategory, CategoryTasks)
@@ -12,6 +13,8 @@ urlpatterns = [
     path('register', RegisterUser.as_view(), name='register'),
     path('all_users', DisplayAllUsers.as_view(), name='all_users'),
     path('add_friend/<int:pk>', ConfirmFriend.as_view(), name='add_friend'),
+    path('remove_friend/<int:pk>', RemoveFriend.as_view(), name='remove_friend'),
+    path('friend_list', FriendList.as_view(), name='friend_list'),
     path('delete_friend_request/<int:pk>', DeleteFriendRequest.as_view(), name='delete_friend_request'),
     path('accept_friend_request/<int:pk>', AcceptFriendRequest.as_view(), name='accept_friend_request'),
     path('dashboard', TemplateView.as_view(template_name='accounts/dashboard.html'), name='dashboard'),

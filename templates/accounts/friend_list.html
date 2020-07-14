@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Accounts Home - All Users
+    Friend List
 {% endblock %}
 
 {% block content %}
 <div class="container">
     <h3 class="orange-text">
-    {{ request.user.user_name }}, These users have registered on this site!
+    {{ request.user.user_name }}, These users are your friends!
     </h3>
 
     {% if messages %}
@@ -30,16 +30,7 @@
                     Biography ~ {{ each_user.user_bio }}
                 </p>
                 {% endif %}
-            {% if each_user.id in sent_requests %}
-                <a href="{% url 'accounts:delete_friend_request' pk=each_user.id %}" class="btn button red">Delete Friend Request</a>
-            {% elif each_user.id in received_requests %}
-                <a href="{% url 'accounts:accept_friend_request' pk=each_user.id %}" class="btn button accept_friend">Accept Friend Request</a>
-                <a href="{% url 'accounts:delete_friend_request' pk=each_user.id %}" class="btn button red">Delete Friend Request</a>
-            {% elif each_user.id in all_friends %}
                 <a href="{% url 'accounts:remove_friend' pk=each_user.id %}" class="btn button cyan">Remove Friend</a>
-            {% else %}
-                <a href="{% url 'accounts:add_friend' pk=each_user.id %}" class="btn orange" >Add Friend</a>
-            {% endif %}
             </div>
 
         {% endfor %}

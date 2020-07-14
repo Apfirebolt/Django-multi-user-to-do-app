@@ -6,7 +6,7 @@ from django.views.generic import FormView, ListView, UpdateView, View
 from django.http import HttpResponseBadRequest
 from . forms import UserRegistrationForm
 from django.contrib.auth import authenticate
-from . models import CustomUser, FriendRequest
+from . models import CustomUser, FriendRequest, SingleFriend
 from django.contrib import messages
 from datetime import datetime
 
@@ -57,9 +57,13 @@ class DisplayAllUsers(ListView):
   def get_context_data(self, *, object_list=None, **kwargs):
     context = super(DisplayAllUsers, self).get_context_data()
     sent_requests = [int(x.send_to.id) for x in FriendRequest.objects.filter(send_from=self.request.user)]
-    print(sent_requests)
     received_requests = [int(x.send_from.id) for x in FriendRequest.objects.filter(send_to=self.request.user)]
-    print(received_requests)
+    friends = SingleFriend.objects.filter(friend_of=self.request.user).first()
+    if friends:
+      all_fnds = [int(x.id) for x in friends.all_friends.all()]
+    else:
+      all_fnds = []
+    context['all_friends'] = all_fnds
     context['sent_requests'] = sent_requests
     context['received_requests'] = received_requests
     return context
@@ -106,13 +110,51 @@ class AcceptFriendRequest(View):
   def post(self, *args, **kwargs):
     try:
       userObj = CustomUser.objects.get(id=self.kwargs['pk'])
-      friendRequestObj = FriendRequest.objects.get(send_to=self.request.user, send_from=userObj)
-      friendRequestObj.is_accepted = True
-      friendRequestObj.accepted_at = datetime.now()
-      friendRequestObj.save()
+      userFriendList = SingleFriend.objects.filter(friend_of=self.request.user).first()
+      if not userFriendList:
+        userFriendList = SingleFriend(friend_of=self.request.user)
+        userFriendList.save()
+      userFriendList.all_friends.add(userObj)
+      userFriendList.save()
+      friendRequestObj = FriendRequest.objects.get(send_from=userObj, send_to=self.request.user)
+      friendRequestObj.delete()
       messages.add_message(self.request, messages.SUCCESS,
                            'Congratulations, you are now friends with this user with email %s!' % (userObj.email))
     except Exception as Err:
       print(Err)
       return HttpResponseBadRequest('Some error occurred')
     return HttpResponseRedirect(reverse_lazy('accounts:all_users'))
+
+
+class FriendList(ListView):
+  model = CustomUser
+  template_name = 'accounts/friend_list.html'
+  context_object_name = 'all_users'
+
+  def get_queryset(self):
+    friendListObj = SingleFriend.objects.filter(friend_of_id=self.request.user.id).first()
+    if friendListObj:
+      user_ids = [int(x.id) for x in friendListObj.all_friends.all()]
+      qs = CustomUser.objects.filter(pk__in=user_ids)
+    else:
+      qs = []
+    return qs
+
+
+class RemoveFriend(View):
+  def get(self, request, pk):
+    currentUser = CustomUser.objects.get(id=pk)
+    return render(request, 'accounts/remove_friend.html', {'user': currentUser})
+
+  def post(self, *args, **kwargs):
+    try:
+      userObj = CustomUser.objects.get(id=self.kwargs['pk'])
+      userFriendList = SingleFriend.objects.filter(friend_of=self.request.user).first()
+      userFriendList.all_friends.remove(userObj)
+      userFriendList.save()
+      messages.add_message(self.request, messages.SUCCESS,
+                           'You have removed this user with email %s from your friend list!' % (userObj.email))
+    except Exception as Err:
+      print(Err)
+      return HttpResponseBadRequest('Some error occurred')
+    return HttpResponseRedirect(reverse_lazy('accounts:friend_list'))

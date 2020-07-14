@@ -43,3 +43,10 @@ class FriendRequest(models.Model):
     return str(self.send_from) + '-' + str(self.send_to)
 
 
+class SingleFriend(models.Model):
+    friend_of = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='friend_of')
+    all_friends = models.ManyToManyField(CustomUser, related_name='all_friends')
+
+    def __str__(self):
+      return str(self.friend_of.email)
+

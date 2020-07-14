@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Remove Friend
+{% endblock %}
+
+{% block content %}
+<h3 class="orange-text center">
+    Remove Friend - Confirm
+</h3>
+
+<form method="post" class="delete-container">{% csrf_token %}
+    <p>Are you sure you want to end your friendship with this user with email {{ user.email }} ?</p>
+    <input type="submit" value="Yes, Remove as friend!" class="button btn red">
+</form>
+{% endblock %}

@@ -82,6 +82,7 @@ p {
     color: #1d7d74;
     padding: 1rem;
     margin: 1rem auto;
+    display: block;
 }
 
 .alert-info {
@@ -92,4 +93,9 @@ p {
     font-size: 1.2rem;
     color: #FFF;
     font-weight: 500;
+}
+
+.accept_friend {
+    margin-bottom: 0.5rem;
+    background-color: #1d7d74;
 }
