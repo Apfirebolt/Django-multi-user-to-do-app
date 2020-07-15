@@ -8,6 +8,7 @@ from tasks.views import (CreateTask, DeleteTask, DetailTask, ListTask, UpdateTas
 
 
 urlpatterns = [
+    path('api/', include(('accounts.api.urls', 'accounts_api'), namespace='accounts_api')),
     path('login', LoginView.as_view(), name='login'),
     path('logout/', AuthViews.LogoutView.as_view(), name='logout'),
     path('register', RegisterUser.as_view(), name='register'),

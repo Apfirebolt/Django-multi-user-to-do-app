@@ -71,7 +71,7 @@ class ListTask(LoginRequiredMixin, ListView):
     return Task.objects.filter(category_id__in=[int(eachObj.id) for eachObj in allUserCategories])
 
 
-class DetailTask(LoginRequiredMixin, DetailView):
+class DetailTask(DeleteTaskMixin, LoginRequiredMixin, DetailView):
   model = Task
   context_object_name = 'task'
   template_name = 'tasks/detail_task.html'

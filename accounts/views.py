@@ -9,6 +9,9 @@ from django.contrib.auth import authenticate
 from . models import CustomUser, FriendRequest, SingleFriend
 from django.contrib import messages
 from datetime import datetime
+from django.db.models.signals import post_save
+from rest_framework.authtoken.models import Token
+from django.dispatch import receiver
 
 
 class RegisterUser(FormView):
@@ -24,6 +27,12 @@ class RegisterUser(FormView):
     userObj.save()
     messages.add_message(self.request, messages.INFO, 'You have successfully registered, Please login to continue!')
     return HttpResponseRedirect(reverse('accounts:login'))
+
+
+@receiver(post_save, sender=CustomUser)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 
 
 class LoginView(View):

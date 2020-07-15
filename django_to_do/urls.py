@@ -24,6 +24,9 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('error', TemplateView.as_view(template_name='error_page.html'), name='error'),
     path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
+    path('topics/', include(('topics.urls', 'topics'), namespace='topics')),
+    path('pm/', include(('pm.urls', 'pm'), namespace='pm')),
+    path('tasks/api', include(('tasks.api.urls', 'tasks'), namespace='tasks')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

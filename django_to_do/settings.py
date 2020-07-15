@@ -40,8 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'django_cleanup',
+    'rest_framework',
+    'rest_framework.authtoken',
     'accounts',
-    'tasks'
+    'tasks',
+    'pm',
+    'topics'
 ]
 
 MIDDLEWARE = [
@@ -108,6 +112,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler'
+}
 
 LANGUAGE_CODE = 'en-us'
 
