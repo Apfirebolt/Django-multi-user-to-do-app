@@ -76,7 +76,7 @@ typed-ast==1.4.0
 Unidecode==1.1.1
 urllib3==1.25.7
 w3lib==1.21.0
-wagtail==2.7
+wagtail==2.7.4
 webencodings==0.5.1
 whitenoise==5.0.1
 Willow==1.3
