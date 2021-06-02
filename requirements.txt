@@ -74,7 +74,7 @@ sqlparse==0.3.0
 Twisted==19.10.0
 typed-ast==1.4.0
 Unidecode==1.1.1
-urllib3==1.25.7
+urllib3==1.26.5
 w3lib==1.21.0
 wagtail==2.7
 webencodings==0.5.1
