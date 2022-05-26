@@ -1,12 +1,18 @@
-# A Multi-user To Do Application in Django using Materialize CSS Framework
+https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green
+https://img.shields.io/badge/django%20rest-ff1709?style=for-the-badge&logo=django&logoColor=white
 
-A multi user based to do app in Django using materialize css framework. It has the ability to create tasks segregated by category
-and has full CRUD functionality on both categories and tasks.
+# A Multi-user To Do Application in Django using React and Bootstrap
+
+A multi user based to do app in Django using React and Bootstrap. It has the ability to create tasks segregated by category
+and has full CRUD functionality on both categories and tasks. It is being given a make-over by having a separate front-end written in React.
+
+All the forms are now replaced by serializers, Multi-page architecture of the application is now changed into single page application using React having to render a single Html page with all assets. 
 
 ## Getting Started
 
 Create a new virtual environment as a best practice norm. Install python packages through pip using the bundled requirements
-file. This project uses Django version 2.2, so just in case you wanted to know. For the database it uses Sqlite3.
+file. This project used Django version 2.2 but that has been updated recently to Django 4 (May - 2022), so just in case you wanted to know. For the database it uses Postgres. Some of the features of this application are written below :-
 
 * You can start by registering through the custom user login system built in Django.
 * Create a category to get started before you can add a task into your category.
@@ -23,7 +29,7 @@ file. This project uses Django version 2.2, so just in case you wanted to know. 
 
 ## Authors
 
-* **Amit Prafulla (APFirebolt)** - [PurpleBooth](https://github.com/PurpleBooth)
+* **Amit Prafulla (APFirebolt)** - [My Website](https://apgiiit.com)
 
 ## License
 
