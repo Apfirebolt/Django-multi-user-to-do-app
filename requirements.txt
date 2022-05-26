@@ -38,7 +38,7 @@ lxml==4.4.2
 mccabe==0.6.1
 mysql-connector-python==8.0.20
 mysqlclient==1.4.4
-numpy==1.19.0
+numpy==1.21.0
 packaging==20.4
 parsel==1.5.2
 Pillow==6.1.0
