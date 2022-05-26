@@ -3,8 +3,8 @@ from django_to_do.settings import AUTH_USER_MODEL
 
 
 class Category(models.Model):
-  name = models.CharField(max_length=200)
-  description = models.TextField()
+  name = models.CharField('Category Name', max_length=200)
+  description = models.TextField('Category Description')
   category_image = models.ImageField(upload_to='category_images')
   created_at = models.DateTimeField(auto_now=True)
   created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -17,10 +17,10 @@ class Category(models.Model):
 
 
 class Task(models.Model):
-  name = models.CharField(max_length=200)
-  description = models.TextField()
-  deadline_date = models.DateField()
-  priority = models.IntegerField()
+  name = models.CharField('Task Name', max_length=200)
+  description = models.TextField('Task Description')
+  deadline_date = models.DateField('Task Deadline Date')
+  priority = models.IntegerField('Task Priority')
   category = models.ForeignKey(Category, on_delete=models.CASCADE)
   created_at = models.DateTimeField(auto_now=True)
 

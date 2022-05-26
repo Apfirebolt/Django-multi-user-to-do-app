@@ -1,10 +1,11 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-#idea
+#Pycharm and VS Code
 .idea
+.vscode
 
 # dependencies
-/node_modules
+node_modules
 /media
 *.sqlite3
 
@@ -19,6 +20,7 @@
 /documentation
 
 # misc
+**/__pycache__/
 .DS_Store
 .env.local
 .env.development.local
@@ -28,3 +30,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignore virtual environment
+venv
