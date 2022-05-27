@@ -22,6 +22,7 @@ class Task(models.Model):
   deadline_date = models.DateField('Task Deadline Date')
   priority = models.IntegerField('Task Priority')
   category = models.ForeignKey(Category, on_delete=models.CASCADE)
+  created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
   created_at = models.DateTimeField(auto_now=True)
 
   def __str__(self):
