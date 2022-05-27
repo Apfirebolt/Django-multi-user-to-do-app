@@ -17,7 +17,7 @@ const RegisterScreen = () => {
 
   return (
     <FormContainer>
-      <h3 className="text-center my-4">LOGIN</h3>
+      <h3 className="text-center my-4">REGISTER</h3>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email" className="my-3">
           <Form.Label>Email Address</Form.Label>

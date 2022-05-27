@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+import PrivateRoute from './components/common/PrivateRoute'
 import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
 import Home from './pages/Home'
@@ -20,8 +21,12 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
-            <Route path='/category' element={<CategoryScreen />} />
-            <Route path='/task' element={<TaskScreen />} />
+            <Route path='/category' element={<PrivateRoute />}>
+              <Route path='/category' element={<CategoryScreen />} />
+            </Route>
+            <Route path='/task' element={<PrivateRoute />}>
+              <Route path='/task' element={<TaskScreen />} />
+            </Route>
           </Routes>
         </div>
         <Footer />

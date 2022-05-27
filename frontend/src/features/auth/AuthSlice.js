@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import authService from './authService'
+import authService from './AuthService'
+import { toast } from 'react-toastify'
 
 // Get user from localstorage
 const user = JSON.parse(localStorage.getItem('user'))
@@ -83,6 +84,7 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
+        toast.success("Logged in successfully!")
         state.user = action.payload
       })
       .addCase(login.rejected, (state, action) => {
@@ -93,6 +95,7 @@ export const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null
+        toast.success("Logged out successfully!")
       })
   },
 })

@@ -1,17 +1,44 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/forms/FormContainer";
+import { login, reset } from '../features/auth/AuthSlice'
 
 const LoginScreen = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { user, isLoading, isSuccess } = useSelector(
+    (state) => state.auth
+  )
+
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("Submit handler called..");
+
+    const userData = {
+      email,
+      password,
+    }
+
+    dispatch(login(userData))
   };
+
+  useEffect(() => {
+    
+    // Redirect when logged in
+    if (user) {
+      navigate('/category')
+    }
+
+    dispatch(reset())
+  }, [user, navigate, dispatch])
 
   return (
     <FormContainer>
