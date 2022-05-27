@@ -38,12 +38,12 @@ const Header = () => {
              </LinkContainer>
              <LinkContainer to='/category'>
                <Nav.Link>
-                 <i className='fas fa-shopping-cart'></i> Category
+                Category
                </Nav.Link>
              </LinkContainer>
              <LinkContainer to='/task'>
                <Nav.Link>
-                 <i className='fas fa-shopping-cart'></i> Task
+                Task
                </Nav.Link>
              </LinkContainer>
            </Nav>
@@ -51,12 +51,12 @@ const Header = () => {
            <Nav className='mr-auto'>
               <LinkContainer to='/login'>
                 <Nav.Link>
-                  <i className='fas fa-shopping-cart'></i> Login
+                  Login
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to='/register'>
                 <Nav.Link>
-                  <i className='fas fa-shopping-cart'></i> Register
+                  Register
                 </Nav.Link>
               </LinkContainer>
             </Nav>

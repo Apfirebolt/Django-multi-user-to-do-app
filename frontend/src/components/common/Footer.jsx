@@ -6,7 +6,7 @@ const Footer = () => {
     <footer>
       <Container>
         <Row>
-          <Col className='text-center py-3'>Copyright &copy; ProShop</Col>
+          <Col className='text-center bg-success text-white fixed-bottom py-3'>Copyright &copy; To Do App in Django and React</Col>
         </Row>
       </Container>
     </footer>

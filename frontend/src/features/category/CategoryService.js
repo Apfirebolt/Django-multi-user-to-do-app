@@ -1,42 +1,34 @@
-import axios from 'axios'
+import httpClient from "../../plugins/interceptor"
 
-const API_URL = '/api/tickets/'
-
-// Get ticket notes
-const getNotes = async (ticketId, token) => {
+// Get Categories
+const getCategories = async (token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }
 
-  const response = await axios.get(API_URL + ticketId + '/notes', config)
+  const response = await httpClient.get('category', config)
 
   return response.data
 }
 
-// Create ticket note
-const createNote = async (noteText, ticketId, token) => {
+// Create category
+const createCategory = async (data, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }
 
-  const response = await axios.post(
-    API_URL + ticketId + '/notes',
-    {
-      text: noteText,
-    },
-    config
-  )
+  const response = await httpClient.post('/category', data, config)
 
   return response.data
 }
 
-const noteService = {
-  getNotes,
-  createNote,
+const categoryService = {
+  getCategories,
+  createCategory,
 }
 
-export default noteService
+export default categoryService

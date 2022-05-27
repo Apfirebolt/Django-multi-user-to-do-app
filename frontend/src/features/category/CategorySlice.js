@@ -1,21 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import noteService from './noteService'
+import { toast } from 'react-toastify'
+import categoryService from './CategoryService'
 
 const initialState = {
-  notes: [],
+  categories: [],
+  category: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: '',
 }
 
-// Get ticket notes
-export const getNotes = createAsyncThunk(
-  'notes/getAll',
-  async (ticketId, thunkAPI) => {
+// Get Categories
+export const getCategories = createAsyncThunk(
+  'category/getAll',
+  async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token
-      return await noteService.getNotes(ticketId, token)
+      const token = thunkAPI.getState().auth.user.access
+      return await categoryService.getCategories(token)
     } catch (error) {
       const message =
         (error.response &&
@@ -29,13 +31,13 @@ export const getNotes = createAsyncThunk(
   }
 )
 
-// Create ticket note
-export const createNote = createAsyncThunk(
-  'notes/create',
-  async ({ noteText, ticketId }, thunkAPI) => {
+// Create a new category
+export const createCategory = createAsyncThunk(
+  'category/create',
+  async (data, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token
-      return await noteService.createNote(noteText, ticketId, token)
+      const token = thunkAPI.getState().auth.user.access
+      return await categoryService.createCategory(data, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -49,36 +51,37 @@ export const createNote = createAsyncThunk(
   }
 )
 
-export const noteSlice = createSlice({
-  name: 'note',
+export const categorySlice = createSlice({
+  name: 'category',
   initialState,
   reducers: {
     reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getNotes.pending, (state) => {
+      .addCase(getCategories.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getNotes.fulfilled, (state, action) => {
-        state.isLoading = true
+      .addCase(getCategories.fulfilled, (state, action) => {
+        state.isLoading = false
         state.isSuccess = true
-        state.notes = action.payload
+        state.categories = action.payload
       })
-      .addCase(getNotes.rejected, (state, action) => {
+      .addCase(getCategories.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(createNote.pending, (state) => {
+      .addCase(createCategory.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(createNote.fulfilled, (state, action) => {
+      .addCase(createCategory.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.notes.push(action.payload)
+        toast.success(`Category with the name "${action.payload.name}" was created successfully!`);
+        state.categories.push(action.payload)
       })
-      .addCase(createNote.rejected, (state, action) => {
+      .addCase(createCategory.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
@@ -86,5 +89,5 @@ export const noteSlice = createSlice({
   },
 })
 
-export const { reset } = noteSlice.actions
-export default noteSlice.reducer
+export const { reset } = categorySlice.actions
+export default categorySlice.reducer

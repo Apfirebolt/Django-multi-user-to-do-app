@@ -2,10 +2,16 @@ from rest_framework.generics import ListAPIView, CreateAPIView, ListCreateAPIVie
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-from . serializers import CustomUserSerializer, ListCustomUserSerializer, CategorySerializer, TaskSerializer
+from . serializers import CustomUserSerializer, ListCustomUserSerializer, CategorySerializer, TaskSerializer \
+    , CustomTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 from api.permissions import IsCategoryOwner 
 from tasks.models import Category, Task
 from accounts.models import CustomUser
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    # Replace the serializer with your custom
+    serializer_class = CustomTokenObtainPairSerializer
 
 
 class CreateCustomUserApiView(CreateAPIView):
@@ -41,7 +47,7 @@ class CategoryListApiView(ListCreateAPIView):
 
     def list(self, request):
         queryset = Category.objects.filter(created_by=request.user)
-        serializer = CategorySerializer(queryset, many=True)
+        serializer = CategorySerializer(queryset, many=True, context={'request' : request})
         return Response(serializer.data)
 
 class CategoryUpdateDeleteDetailApiView(RetrieveUpdateDestroyAPIView):
