@@ -1,19 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from "react-router-dom";
+import { register, reset } from '../features/auth/AuthSlice'
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/forms/FormContainer";
 
 const RegisterScreen = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const { user, isLoading, isSuccess } = useSelector(
+    (state) => state.auth
+  )
+
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("Submit handler called..");
+
+    const userData = {
+      email,
+      username,
+      password,
+    }
+
+    dispatch(register(userData))
   };
+
+  useEffect(() => {
+    
+    // Redirect when logged in
+    if (user) {
+      navigate('/category')
+    }
+
+    dispatch(reset())
+  }, [user, navigate, dispatch])
 
   return (
     <FormContainer>
@@ -54,7 +79,7 @@ const RegisterScreen = () => {
           <Form.Control
             type="password"
             placeholder="Enter password again to confirm"
-            value={password}
+            value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>

@@ -14,8 +14,6 @@ const register = async (userData) => {
 const login = async (userData) => {
   const response = await httpClient.post('login', userData)
 
-  console.log('REsponse data is ', response.data)
-
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
   }

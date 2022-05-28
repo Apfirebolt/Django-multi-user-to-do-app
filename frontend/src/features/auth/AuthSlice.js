@@ -70,6 +70,7 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
+        toast.success("Registered successfully!")
         state.user = action.payload
       })
       .addCase(register.rejected, (state, action) => {

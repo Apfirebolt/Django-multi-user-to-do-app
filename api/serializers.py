@@ -21,20 +21,21 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class CustomUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    tokens = serializers.SerializerMethodField()
+    access = serializers.SerializerMethodField()
+    refresh = serializers.SerializerMethodField()
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'is_staff', 'password', 'tokens',)
-
-    def get_tokens(self, user):
+        fields = ('username', 'email', 'id', 'is_staff', 'password', 'access', 'refresh',)
+    
+    def get_refresh(self, user):
         refresh = RefreshToken.for_user(user)
+        return str(refresh)
 
-        data = {
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-        }
-        return data
+    def get_access(self, user):
+        refresh = RefreshToken.for_user(user)
+        access = str(refresh.access_token),
+        return access
 
     def create(self, validated_data):
         user = super(CustomUserSerializer, self).create(validated_data)

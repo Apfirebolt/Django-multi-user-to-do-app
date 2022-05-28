@@ -110,6 +110,7 @@ export const categorySlice = createSlice({
       .addCase(getCategories.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
+        toast.error(action.payload);
         state.message = action.payload
       })
       .addCase(createCategory.pending, (state) => {
