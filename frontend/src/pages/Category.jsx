@@ -8,6 +8,7 @@ import {
   deleteCategory,
   getCategories,
 } from "../features/category/CategorySlice";
+import ScrollAnimation from 'react-animate-on-scroll';
 import CategoryForm from "../components/modals/AddUpdateCategory";
 
 const CategoryScreen = () => {
