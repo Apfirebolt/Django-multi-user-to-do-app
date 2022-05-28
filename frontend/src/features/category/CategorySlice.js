@@ -133,7 +133,7 @@ export const categorySlice = createSlice({
         state.isLoading = false
         state.isSuccess = true
         toast.success(`Category with the name "${action.payload.name}" was updated successfully!`);
-        let foundIndex = state.categories.findIndex(x => x.id == action.payload.id);
+        let foundIndex = state.categories.findIndex(x => x.id === action.payload.id);
         state.categories[foundIndex] = action.payload
       })
       .addCase(updateCategory.rejected, (state, action) => {
