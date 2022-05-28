@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 
 const CategoryForm = (props) => {
@@ -19,10 +19,24 @@ const CategoryForm = (props) => {
 
     formData.append("name", name);
     formData.append("description", description);
-    formData.append("category_image", category_image);
+    if (category_image) {
+      formData.append("category_image", category_image);
+    }
 
-    props.createCategoryUtil(formData);
+    if (props.updateMode) {
+      formData.append("id", props.category.id);
+      props.updateCategoryUtil(formData);
+    } else {
+      props.createCategoryUtil(formData);
+    }
   };
+
+  useEffect(() => {
+    if(props.category) {
+      setName(props.category.name);
+      setDescription(props.category.description)
+    }
+  }, []);
 
   return (
     <Form onSubmit={submitHandler} encType="multipart/form-data">
