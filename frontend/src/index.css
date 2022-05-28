@@ -304,13 +304,6 @@ h3 {
   transform: scale(0.98);
 }
 
-
-footer {
-  position: sticky;
-  top: 95vh;
-  text-align: center;
-}
-
 .loadingSpinnerContainer {
   position: fixed;
   top: 0;
@@ -359,4 +352,15 @@ footer {
   .heading p {
     font-size: 1.5rem;
   }
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: white !important;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+td {
+  vertical-align: middle;
+  display: table-cell;
 }

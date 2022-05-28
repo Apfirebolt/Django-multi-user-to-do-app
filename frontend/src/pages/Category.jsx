@@ -70,11 +70,13 @@ const CategoryScreen = () => {
 
   return (
     <Container>
-      <h3 className="text-center my-4">CATEGORY</h3>
+      <div className="d-flex my-3 bg-dark text-white p-3 justify-content-between align-items-center">
+        <h3>CATEGORY</h3>
 
-      <Button variant="primary" onClick={openCreateCategoryModal}>
-        Add Category
-      </Button>
+        <Button variant="primary" onClick={openCreateCategoryModal}>
+          Add Category
+        </Button>
+      </div>
 
       <Modal show={isModalOpened} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -133,8 +135,8 @@ const CategoryScreen = () => {
                   <img
                     src={item.category_image}
                     alt="Category Image Not available"
-                    height="150"
-                    width="250"
+                    height="100"
+                    width="150"
                   />
                 </td>
                 <td>

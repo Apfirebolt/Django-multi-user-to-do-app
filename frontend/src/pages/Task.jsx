@@ -6,11 +6,9 @@ import {
   createTask,
   getTasks,
   updateTask,
-  deleteTask
+  deleteTask,
 } from "../features/task/TaskSlice";
-import {
-  getCategories,
-} from "../features/category/CategorySlice";
+import { getCategories } from "../features/category/CategorySlice";
 import TaskForm from "../components/modals/AddUpdateTask";
 
 const TaskScreen = () => {
@@ -27,13 +25,9 @@ const TaskScreen = () => {
   const handleCloseConfirmModal = () => isConfirmModalOpened(false);
   const handleOpenConfirmModal = () => isConfirmModalOpened(true);
 
-  const { tasks, isLoading, isSuccess } = useSelector(
-    (state) => state.task
-  );
+  const { tasks, isLoading, isSuccess } = useSelector((state) => state.task);
 
-  const { categories } = useSelector(
-    (state) => state.category
-  );
+  const { categories } = useSelector((state) => state.category);
 
   const createTaskUtil = (data) => {
     dispatch(createTask(data));
@@ -73,18 +67,26 @@ const TaskScreen = () => {
 
   return (
     <Container>
-      <h3 className="text-center my-4">Task</h3>
+      <div className="d-flex my-3 bg-dark text-white p-3 justify-content-between align-items-center">
+        <h3>Task</h3>
 
-      <Button variant="primary" onClick={handleShow}>
-        Add Task
-      </Button>
+        <Button variant="primary" onClick={handleShow}>
+          Add Task
+        </Button>
+      </div>
 
       <Modal show={isModalOpened} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Task Form</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <TaskForm createTaskUtil={createTaskUtil} updateTaskUtil={updateTaskUtil} task={selectedTask} updateMode={updateMode} categories={categories} />
+          <TaskForm
+            createTaskUtil={createTaskUtil}
+            updateTaskUtil={updateTaskUtil}
+            task={selectedTask}
+            updateMode={updateMode}
+            categories={categories}
+          />
         </Modal.Body>
       </Modal>
 
@@ -95,8 +97,7 @@ const TaskScreen = () => {
           </Modal.Header>
           <Modal.Body>
             <p className="text-danger">
-              Are you sure you want to delete task named "
-              {selectedTask.name}" ?
+              Are you sure you want to delete task named "{selectedTask.name}" ?
             </p>
           </Modal.Body>
 
@@ -149,9 +150,7 @@ const TaskScreen = () => {
           </tbody>
         </Table>
       )}
-      {!tasks.length && (
-        <p className="text-center my-3">No tasks added</p>
-      )}
+      {!tasks.length && <p className="text-center my-3">No tasks added</p>}
     </Container>
   );
 };
