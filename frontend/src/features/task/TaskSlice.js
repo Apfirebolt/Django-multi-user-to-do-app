@@ -1,42 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import ticketService from './ticketService'
+import { toast } from 'react-toastify'
+import taskService from './TaskService'
 
 const initialState = {
-  tickets: [],
-  ticket: {},
+  tasks: [],
+  task: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: '',
 }
 
-// Create new ticket
-export const createTicket = createAsyncThunk(
-  'tickets/create',
-  async (ticketData, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.token
-      return await ticketService.createTicket(ticketData, token)
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString()
-
-      return thunkAPI.rejectWithValue(message)
-    }
-  }
-)
-
-// Get user tickets
-export const getTickets = createAsyncThunk(
-  'tickets/getAll',
+// Get Tasks
+export const getTasks = createAsyncThunk(
+  'task/getAll',
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token
-      return await ticketService.getTickets(token)
+      const token = thunkAPI.getState().auth.user.access
+      return await taskService.getTasks(token)
     } catch (error) {
       const message =
         (error.response &&
@@ -50,13 +31,13 @@ export const getTickets = createAsyncThunk(
   }
 )
 
-// Get user ticket
-export const getTicket = createAsyncThunk(
-  'tickets/get',
-  async (ticketId, thunkAPI) => {
+// Create a new Task
+export const createTask = createAsyncThunk(
+  'task/create',
+  async (data, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token
-      return await ticketService.getTicket(ticketId, token)
+      const token = thunkAPI.getState().auth.user.access
+      return await taskService.createTask(data, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -70,82 +51,43 @@ export const getTicket = createAsyncThunk(
   }
 )
 
-// Close ticket
-export const closeTicket = createAsyncThunk(
-  'tickets/close',
-  async (ticketId, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.token
-      return await ticketService.closeTicket(ticketId, token)
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString()
-
-      return thunkAPI.rejectWithValue(message)
-    }
-  }
-)
-
-export const ticketSlice = createSlice({
-  name: 'ticket',
+export const taskSlice = createSlice({
+  name: 'task',
   initialState,
   reducers: {
     reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createTicket.pending, (state) => {
+      .addCase(getTasks.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(createTicket.fulfilled, (state) => {
+      .addCase(getTasks.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
+        state.tasks = action.payload
       })
-      .addCase(createTicket.rejected, (state, action) => {
+      .addCase(getTasks.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(getTickets.pending, (state) => {
+      .addCase(createTask.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getTickets.fulfilled, (state, action) => {
+      .addCase(createTask.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.tickets = action.payload
+        toast.success(`Task with the name "${action.payload.name}" was created successfully!`);
+        state.tasks.push(action.payload)
       })
-      .addCase(getTickets.rejected, (state, action) => {
+      .addCase(createTask.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
-      })
-      .addCase(getTicket.pending, (state) => {
-        state.isLoading = true
-      })
-      .addCase(getTicket.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
-        state.ticket = action.payload
-      })
-      .addCase(getTicket.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
-      })
-      .addCase(closeTicket.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.tickets.map((ticket) =>
-          ticket._id === action.payload._id
-            ? (ticket.status = 'closed')
-            : ticket
-        )
       })
   },
 })
 
-export const { reset } = ticketSlice.actions
-export default ticketSlice.reducer
+export const { reset } = taskSlice.actions
+export default taskSlice.reducer

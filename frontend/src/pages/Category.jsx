@@ -23,7 +23,7 @@ const CategoryScreen = () => {
   const createCategoryUtil = (data) => {
     dispatch(createCategory(data));
     handleClose();
-  }
+  };
 
   useEffect(() => {
     dispatch(getCategories());
@@ -58,6 +58,7 @@ const CategoryScreen = () => {
               <th>Category Name</th>
               <th>Category Description</th>
               <th>Category Image</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -67,7 +68,20 @@ const CategoryScreen = () => {
                 <td>{item.name} Crook</td>
                 <td>{item.description}</td>
                 <td>
-                  <img src={item.category_image} alt="Category Image Not available" height="150" width="250"/>
+                  <img
+                    src={item.category_image}
+                    alt="Category Image Not available"
+                    height="150"
+                    width="250"
+                  />
+                </td>
+                <td>
+                  <Button variant="danger" onClick={handleShow} className="m-2">
+                    Delete
+                  </Button>
+                  <Button variant="info" onClick={handleShow} className="m-2">
+                    Update
+                  </Button>
                 </td>
               </tr>
             ))}

@@ -60,6 +60,11 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class TaskSerializer(serializers.ModelSerializer):
 
+    category_name = serializers.SerializerMethodField('get_category_name')
     class Meta:
         model = Task
         fields = '__all__'
+
+    def get_category_name(self, obj):
+        return obj.category.name
+
