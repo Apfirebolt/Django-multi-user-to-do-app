@@ -17,5 +17,5 @@ urlpatterns = [
     path('tasks', TaskCreateListApiView.as_view(), name='task-list'),
     path('category', CategoryListApiView.as_view(), name='category-list'),
     path('category/<int:pk>', CategoryUpdateDeleteDetailApiView.as_view(), name='category-detail'),
-    path('task/<int:pk>', TaskUpdateDeleteDetailApiView.as_view(), name='task-detail'),
+    path('tasks/<int:pk>', TaskUpdateDeleteDetailApiView.as_view(), name='task-detail'),
 ]

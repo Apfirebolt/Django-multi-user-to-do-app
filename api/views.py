@@ -2,6 +2,7 @@ from rest_framework.generics import ListAPIView, CreateAPIView, ListCreateAPIVie
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
+from rest_framework import status
 from . serializers import CustomUserSerializer, ListCustomUserSerializer, CategorySerializer, TaskSerializer \
     , CustomTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -55,6 +56,16 @@ class CategoryUpdateDeleteDetailApiView(RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     permission_classes = [IsAuthenticated, IsCategoryOwner]
 
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        object_id = instance.id
+        self.perform_destroy(instance)
+        return Response({
+            "message":"Category deleted successfully",
+            "category_id": object_id
+        },
+        status=status.HTTP_200_OK)
+
 
 
 class TaskCreateListApiView(ListCreateAPIView):
@@ -76,4 +87,17 @@ class TaskUpdateDeleteDetailApiView(RetrieveUpdateDestroyAPIView):
     serializer_class = TaskSerializer
     queryset = Task.objects.all()
     permission_classes = [IsAuthenticated, IsCategoryOwner]
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        object_id = instance.id
+        self.perform_destroy(instance)
+        return Response({
+            "message":"Task deleted successfully",
+            "task_id": object_id
+        },
+        status=status.HTTP_200_OK)
+
+    def perform_destroy(self, instance):
+        instance.delete()
 

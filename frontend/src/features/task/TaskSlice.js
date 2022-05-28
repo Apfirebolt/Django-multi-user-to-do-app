@@ -148,7 +148,7 @@ export const taskSlice = createSlice({
         state.isLoading = false
         state.isSuccess = true
         toast.success(`Task was deleted successfully!`);
-        state.tasks = state.tasks.filter(item => item.id !== action.payload.category_id);
+        state.tasks = state.tasks.filter(item => item.id !== action.payload.task_id);
       })
       .addCase(deleteTask.rejected, (state, action) => {
         state.isLoading = false
