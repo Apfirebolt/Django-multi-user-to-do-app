@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
 import { Link } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/forms/FormContainer";
 import { login, reset } from '../features/auth/AuthSlice'

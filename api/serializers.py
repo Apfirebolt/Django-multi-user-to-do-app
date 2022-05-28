@@ -5,8 +5,11 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
-
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    default_error_messages = {
+        'no_active_account': ('No account exists with these credentials, check password and email')
+    }
+
     def validate(self, attrs):
         
         data = super(CustomTokenObtainPairSerializer, self).validate(attrs)

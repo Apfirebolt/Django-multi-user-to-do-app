@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify'
 
 let baseURL = 'http://localhost:8000/api/';
 
@@ -7,7 +8,6 @@ const httpClient = axios.create({ baseURL });
 // Add a request interceptor
 httpClient.interceptors.request.use(
     function(successReq) { 
-      console.log('Inside request interceptor..', successReq)  
       return successReq;
     }, 
     function(error) {
@@ -17,11 +17,15 @@ httpClient.interceptors.request.use(
 
   // Add a response interceptor
 httpClient.interceptors.response.use(
-    function(successRes) { 
-      console.log('Inside response interceptor..', successRes)  
+    function(successRes) {
       return successRes;
     }, 
     function(error) {
+      if (error.response.status === 401) {
+        if (error.response.data.detail) {
+          toast.error(error.response.data.detail)
+        }
+       }
       return Promise.reject(error);
     }
   );

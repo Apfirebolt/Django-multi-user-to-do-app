@@ -29,6 +29,10 @@ const CategoryScreen = () => {
     (state) => state.category
   );
 
+  const { user } = useSelector(
+    (state) => state.auth
+  );
+
   const createCategoryUtil = (data) => {
     dispatch(createCategory(data));
     handleClose();
@@ -71,6 +75,7 @@ const CategoryScreen = () => {
 
   return (
     <Container>
+      <h3 className="my-3">Welcome, {user.userData.username || user.username}</h3>
       <div className="d-flex my-3 bg-dark text-white p-3 justify-content-between align-items-center">
         <h3>CATEGORY</h3>
 
