@@ -12,8 +12,6 @@ const Header = () => {
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
 
-  console.log('User data is now from user ', user)
-
   const onLogout = () => {
     dispatch(logout())
     dispatch(reset())

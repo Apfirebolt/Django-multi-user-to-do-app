@@ -5,6 +5,8 @@ import Loader from "../components/common/Loader";
 import {
   createTask,
   getTasks,
+  updateTask,
+  deleteTask
 } from "../features/task/TaskSlice";
 import {
   getCategories,
@@ -15,9 +17,15 @@ const TaskScreen = () => {
   const dispatch = useDispatch();
 
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [confirmModalOpened, isConfirmModalOpened] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [updateMode, setUpdateMode] = useState(false);
 
   const handleClose = () => setIsModalOpened(false);
   const handleShow = () => setIsModalOpened(true);
+
+  const handleCloseConfirmModal = () => isConfirmModalOpened(false);
+  const handleOpenConfirmModal = () => isConfirmModalOpened(true);
 
   const { tasks, isLoading, isSuccess } = useSelector(
     (state) => state.task
@@ -30,6 +38,28 @@ const TaskScreen = () => {
   const createTaskUtil = (data) => {
     dispatch(createTask(data));
     handleClose();
+  };
+
+  const openUpdateTask = (data) => {
+    setUpdateMode(true);
+    setSelectedTask(data);
+    handleShow();
+  };
+
+  const openDeleteTask = (data) => {
+    setSelectedTask(data);
+    handleOpenConfirmModal();
+  };
+
+  const updateTaskUtil = (data) => {
+    dispatch(updateTask(data));
+    handleClose();
+  };
+
+  const deleteTaskUtil = () => {
+    dispatch(deleteTask(selectedTask.id));
+    handleCloseConfirmModal();
+    dispatch(getTasks());
   };
 
   useEffect(() => {
@@ -54,9 +84,29 @@ const TaskScreen = () => {
           <Modal.Title>Task Form</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <TaskForm createTaskUtil={createTaskUtil} categories={categories} />
+          <TaskForm createTaskUtil={createTaskUtil} updateTaskUtil={updateTaskUtil} task={selectedTask} updateMode={updateMode} categories={categories} />
         </Modal.Body>
       </Modal>
+
+      {selectedTask && (
+        <Modal show={confirmModalOpened} onHide={handleCloseConfirmModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm Delete Modal</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p className="text-danger">
+              Are you sure you want to delete task named "
+              {selectedTask.name}" ?
+            </p>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="danger" onClick={() => deleteTaskUtil()}>
+              Confirm
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
 
       {tasks.length > 0 && (
         <Table striped bordered hover className="my-3">
@@ -79,10 +129,18 @@ const TaskScreen = () => {
                 <td>{item.priority}</td>
                 <td>{item.category_name}</td>
                 <td>
-                  <Button variant="danger" onClick={handleShow} className="m-2">
+                  <Button
+                    variant="danger"
+                    className="m-2"
+                    onClick={() => openDeleteTask(item)}
+                  >
                     Delete
                   </Button>
-                  <Button variant="info" onClick={handleShow} className="m-2">
+                  <Button
+                    variant="info"
+                    onClick={() => openUpdateTask(item)}
+                    className="m-2"
+                  >
                     Update
                   </Button>
                 </td>

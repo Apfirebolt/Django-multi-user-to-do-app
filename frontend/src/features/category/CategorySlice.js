@@ -147,7 +147,8 @@ export const categorySlice = createSlice({
       .addCase(deleteCategory.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        toast.success(`Category with the name "${action.payload.name}" was deleted successfully!`);
+        toast.success(`Category was deleted successfully!`);
+        state.categories = state.categories.filter(item => item.id !== action.payload.category_id);
       })
       .addCase(deleteCategory.rejected, (state, action) => {
         state.isLoading = false

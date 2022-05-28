@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 
 const TaskForm = (props) => {
@@ -20,8 +20,23 @@ const TaskForm = (props) => {
       category,
     };
 
-    props.createTaskUtil(taskData);
+    if (props.updateMode) {
+      taskData.id = props.task.id
+      props.updateTaskUtil(taskData);
+    } else {
+      props.createTaskUtil(taskData);
+    }
   };
+
+  useEffect(() => {
+    if(props.task) {
+      setName(props.task.name);
+      setDescription(props.task.description)
+      setPriority(props.task.priority);
+      setDeadline(props.task.deadline_date)
+      setCategory(props.task.category)
+    }
+  }, []);
 
   return (
     <Form onSubmit={submitHandler}>

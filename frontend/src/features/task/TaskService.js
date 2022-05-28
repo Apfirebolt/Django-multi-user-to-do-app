@@ -26,9 +26,36 @@ const createTask = async (data, token) => {
   return response.data
 }
 
+// Update task
+const updateTask = async (data, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const response = await httpClient.patch(`tasks/${data.id}`, data, config)
+
+  return response.data
+}
+
+// Delete Task
+const deleteTask = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await httpClient.delete(`tasks/${id}`, config)
+
+  return response.data
+}
+
 const taskService = {
   getTasks,
   createTask,
+  updateTask,
+  deleteTask
 }
 
 export default taskService
