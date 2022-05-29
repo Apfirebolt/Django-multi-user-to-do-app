@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'django_cleanup.apps.CleanupConfig',
+    'rest_framework_swagger',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -66,10 +67,10 @@ ROOT_URLCONF = 'django_to_do.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        'DIRS': [
-            os.path.join(BASE_DIR, 'frontend/build')
-        ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        # 'DIRS': [
+        #     os.path.join(BASE_DIR, 'frontend/build')
+        # ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -187,7 +188,8 @@ SIMPLE_JWT = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
 CORS_ALLOWED_ORIGINS = [
