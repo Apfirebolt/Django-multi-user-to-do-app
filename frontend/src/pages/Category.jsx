@@ -8,7 +8,11 @@ import {
   deleteCategory,
   getCategories,
 } from "../features/category/CategorySlice";
-import ScrollAnimation from 'react-animate-on-scroll';
+
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
 import CategoryForm from "../components/modals/AddUpdateCategory";
 
 const CategoryScreen = () => {
@@ -170,6 +174,7 @@ const CategoryScreen = () => {
         <p className="text-center my-3">No categories added</p>
       )}
     </Container>
+    
   );
 };
 

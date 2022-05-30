@@ -115,70 +115,9 @@ h3 {
   margin: 0 auto;
 }
 
-.form-group {
-  margin-bottom: 10px;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #e6e6e6;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  font-family: inherit;
-}
-
-.form-group label {
-  text-align: left;
-  display: block;
-  margin: 0 0 5px 3px;
-}
-
-.btn {
-  padding: 10px 20px;
-  border: 1px solid #000;
-  border-radius: 5px;
-  background: #000;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  text-align: center;
-  appearance: button;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn svg {
-  margin-right: 8px;
-}
-
 .btn-reverse {
   background: #fff;
   color: #000;
-}
-
-.btn-block {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.btn-sm {
-  padding: 5px 15px;
-  font-size: 13px;
-}
-
-.btn-danger {
-  background: darkred;
-  border: none;
-}
-
-.btn-back {
-  width: 150px;
-  margin-bottom: 20px;
 }
 
 .btn:hover {
@@ -189,114 +128,6 @@ h3 {
   border: 1px solid #e6e6e6;
   border-radius: 5px;
   padding: 50px;
-}
-
-.ticket-number {
-  margin-bottom: 30px;
-}
-
-.ticket-number h2 {
-  font-size: 2.3rem;
-  margin-bottom: 10px;
-}
-
-.ticket-number p {
-  font-size: 1.3rem;
-}
-
-.ticket-info {
-  font-size: 1.3rem;
-}
-
-.ticket,
-.ticket-headings {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  background: #f4f4f4;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.ticket-headings {
-  font-weight: 700;
-}
-
-.ticket-page {
-  position: relative;
-  text-align: left;
-}
-
-.ticket-page h2 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.ticket-page .btn {
-  margin-bottom: 30px;
-}
-
-.ticket-page .btn-block {
-  width: 100%;
-  margin-top: 30px;
-}
-
-.ticket-desc {
-  margin: 20px 0;
-  font-size: 17px;
-  background-color: #f4f4f4;
-  border: 1px #ccc solid;
-  padding: 10px 15px;
-  border-radius: 5px;
-}
-
-.note {
-  border: 1px solid #e6e6e6;
-  border-radius: 5px;
-  text-align: left;
-  padding: 20px;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.note-head {
-  background: #f4f4f4;
-  padding: 5px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.note-date {
-  position: absolute;
-  top: 15px;
-  right: 10px;
-  font-size: 14px;
-}
-
-.delete-note {
-  color: red;
-  cursor: pointer;
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
-}
-
-.btn-close {
-  background: none;
-  border: none;
-  color: #000;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 .btn-close:hover {
@@ -381,4 +212,87 @@ td {
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 300ms, transform 300ms;
+}
+
+.right-to-left-enter {
+  transform: translateX(100%);
+}
+.right-to-left-enter-active {
+  transform: translateX(0);
+  transition:all 1s ease;
+}      
+
+.right-to-left-exit {
+  transform: translateX(0);
+}
+.right-to-left-exit-active {
+  transform: translateX(-100%);
+  transition:all 1s ease;
+}      
+
+.left-to-right-enter {
+  transform: translateX(-100%);
+}
+.left-to-right-enter-active {
+  transform: translateX(0);
+  transition:all 1s ease;
+}      
+
+.left-to-right-exit {
+  transform: translateX(0);
+}
+.left-to-right-exit-active {
+  transform: translateX(100%);
+  transition:all 1s ease;
+}
+
+.remove-btn {
+  margin-right: 0.5rem;
+}
+
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+.label {
+  margin-bottom: 0.5rem;
+}
+
+.modes {
+  margin-bottom: 1rem;
+}
+
+.button-container {
+  margin-bottom: 0.5rem;
+}
+
+.fade-enter .btn {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.fade-enter-active .btn {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.fade-exit .btn {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.fade-exit-active .btn {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.fade-enter-active .btn,
+.fade-exit-active .btn {
+  transition: opacity 500ms, transform 500ms;
 }

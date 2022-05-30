@@ -1,10 +1,28 @@
-import React, { useState } from "react";
-import { Container, Button, Alert } from "react-bootstrap";
-import { CSSTransition } from "react-transition-group";
+import React, { useState, useRef } from "react";
+import { Button, Alert } from "react-bootstrap";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const HomeScreen = () => {
   const [showButton, setShowButton] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
+
+  const [isNext, setIsNext] = useState(true);
+
+  const paragraphs = [
+    {
+      index: 1,
+      content: 'Index 1 content'
+    },
+    {
+      index: 2,
+      content: 'Index 2 content'
+    }
+  ]
+
+  const onNext = () => setIsNext(true);
+  const onPrevious = () => setIsNext(false);
+
+  const nodeRef = useRef(null);
 
   return (
     <>

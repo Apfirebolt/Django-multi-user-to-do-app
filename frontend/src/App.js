@@ -8,6 +8,7 @@ import Footer from './components/common/Footer'
 import Home from './pages/Home'
 import LoginScreen from './pages/Login'
 import RegisterScreen from './pages/Register'
+import AnimationScreen from './pages/Animation'
 import CategoryScreen from './pages/Category'
 import TaskScreen from './pages/Task'
 
@@ -21,6 +22,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
+            <Route path='/animation' element={<AnimationScreen />} />
             <Route path='/category' element={<PrivateRoute />}>
               <Route path='/category' element={<CategoryScreen />} />
             </Route>
