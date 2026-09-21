@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from accounts.models import CustomUser
-from tasks.models import Category, Task
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -51,24 +50,4 @@ class ListCustomUserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'email', 'is_staff',)
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Category
-        fields = ('id', 'category_image', 'name', 'description',)
-        read_only_fields = ['created_by']
-
-
-class TaskSerializer(serializers.ModelSerializer):
-
-    category_name = serializers.SerializerMethodField('get_category_name')
-    class Meta:
-        model = Task
-        fields = '__all__'
-
-    def get_category_name(self, obj):
-        return obj.category.name
-
+        fields = ('id', 'username', 'email', 'is_staff', 'user_bio',)
