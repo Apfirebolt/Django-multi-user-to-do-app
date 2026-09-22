@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { userAtom, isAuthenticatedAtom, logoutAtom } from '../store/authAtoms';
 import { Box, Flex, Heading, Button, Text, HStack } from '@chakra-ui/react';
