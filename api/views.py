@@ -1,12 +1,16 @@
-from rest_framework.generics import ListAPIView, CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
-from . serializers import CustomUserSerializer, ListCustomUserSerializer, CustomTokenObtainPairSerializer
+from .serializers import (
+    CustomUserSerializer, 
+    UserUpdateSerializer, 
+    ListCustomUserSerializer, 
+    CustomTokenObtainPairSerializer
+)
 from rest_framework_simplejwt.views import TokenObtainPairView
 from accounts.models import CustomUser
 
 class CustomTokenObtainPairView(TokenObtainPairView):
-    # Replace the serializer with your custom
     serializer_class = CustomTokenObtainPairSerializer
     authentication_classes = []
 
@@ -18,14 +22,13 @@ class CreateCustomUserApiView(CreateAPIView):
 
 
 class ChangeSettingsApiView(UpdateAPIView):
-    serializer_class = CustomUserSerializer
+    # Use the safe update serializer instead of CustomUserSerializer
+    serializer_class = UserUpdateSerializer
     queryset = CustomUser.objects.all()
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, id=self.request.user.id)
-        return obj
+        return get_object_or_404(self.get_queryset(), id=self.request.user.id)
 
 
 class ListCustomUsersApiView(ListAPIView):

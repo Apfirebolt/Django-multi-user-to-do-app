@@ -1,11 +1,26 @@
 import { useAtomValue } from 'jotai';
+import { useEffect } from 'react';
 import { isAuthenticatedAtom, userAtom } from '../store/authAtoms';
 import { Container, Heading, Text, Button, VStack, HStack } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router';
+import httpClient from '../plugins/interceptor';
 
 export default function Home() {
   const isAuthenticated = useAtomValue(isAuthenticatedAtom);
   const user = useAtomValue(userAtom);
+
+  // if user is logged in get all users
+  useEffect(() => {
+    if (isAuthenticated) {
+      httpClient.get('/users')
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  }, [isAuthenticated]);
 
   return (
     <Container maxW="4xl" py={20}>

@@ -27,10 +27,10 @@ export const loginAtom = atom(
       const response = await httpClient.post('login', credentials);
       const { access, refresh, userData } = response.data;
 
-      // Save token to cookies (which httpClient expects)
-      Cookies.set('token', access, { expires: 1 });
+      // Match the exact cookie names expected by httpClient.js
+      Cookies.set('access_token', access, { expires: 1 });
       if (refresh) {
-        Cookies.set('refreshToken', refresh, { expires: 7 });
+        Cookies.set('refresh_token', refresh, { expires: 7 });
       }
       
       // Save user data to localStorage
@@ -66,8 +66,8 @@ export const registerAtom = atom(
 export const logoutAtom = atom(
   null,
   (get, set) => {
-    Cookies.remove('token');
-    Cookies.remove('refreshToken');
+    Cookies.remove('access_token');
+    Cookies.remove('refresh_token');
     localStorage.removeItem('user_data');
     
     set(tokenAtom, null);

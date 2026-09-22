@@ -6,15 +6,15 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     default_error_messages = {
-        'no_active_account': ('No account exists with these credentials, check password and email')
+        'no_active_account': 'No account exists with these credentials, check password and email'
     }
 
     def validate(self, attrs):
-        
-        data = super(CustomTokenObtainPairSerializer, self).validate(attrs)
-        # Custom data 
+        data = super().validate(attrs)
+        # Added username so frontend matches your login atom expectation
         data.update({'userData': {
             'email': self.user.email,
+            'username': self.user.username,
             'id': self.user.id
         }})
         return data
@@ -27,7 +27,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'id', 'is_staff', 'password', 'access', 'refresh',)
+        fields = ('username', 'email', 'id', 'is_staff', 'password', 'access', 'refresh', 'user_bio')
     
     def get_refresh(self, user):
         refresh = RefreshToken.for_user(user)
@@ -35,18 +35,22 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     def get_access(self, user):
         refresh = RefreshToken.for_user(user)
-        access = str(refresh.access_token),
-        return access
+        # Fixed trailing comma bug (removed comma)
+        return str(refresh.access_token)
 
     def create(self, validated_data):
-        user = super(CustomUserSerializer, self).create(validated_data)
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
+        # Use manager's create_user to safely hash passwords
+        return CustomUser.objects.create_user(**validated_data)
+
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    """Separate serializer for profile updates so password isn't required"""
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'firstName', 'lastName', 'user_bio', 'profile_image')
 
 
 class ListCustomUserSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = CustomUser
         fields = ('id', 'username', 'email', 'is_staff', 'user_bio',)
