@@ -12,7 +12,7 @@ export default function Home() {
       <VStack spacing={6} textAlign="center" align="center">
         
         <Heading as="h1" size="2xl" fontWeight="serif" lineHeight="shorter">
-          {isAuthenticated ? `Welcome back, ${user?.username || user?.email}!` : 'Where good ideas find you.'}
+          {isAuthenticated ? `Welcome back, ${user?.email}!` : 'Where good ideas find you.'}
         </Heading>
         
         <Text fontSize="lg" color="gray.600" maxW="lg">

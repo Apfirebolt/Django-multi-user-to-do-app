@@ -1,5 +1,5 @@
 import { Box, Container, Stack, Text, Link } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router';
 
 export default function Footer() {
   return (

@@ -1,19 +1,17 @@
 import { useState } from 'react';
 import { useSetAtom } from 'jotai';
 import { loginAtom } from '../store/authAtoms';
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router';
 import {
   Box,
   Button,
   Container,
-  FormControl,
-  FormLabel,
+  Field,
   Heading,
   Input,
   Stack,
   Text,
   Alert,
-  AlertIcon,
 } from '@chakra-ui/react';
 
 export default function Login() {
@@ -36,7 +34,6 @@ export default function Login() {
     if (result.success) {
       navigate('/');
     } else {
-      // Handle various error formats from Django/Axios
       if (typeof result.error === 'string') {
         setError(result.error);
       } else if (result.error?.detail) {
@@ -57,31 +54,33 @@ export default function Login() {
           </Heading>
 
           {error && (
-            <Alert status="error" borderRadius="md">
-              <AlertIcon />
-              {error}
-            </Alert>
+            <Alert.Root status="error" borderRadius="md">
+              <Alert.Indicator />
+              <Alert.Content>
+                <Alert.Description>{error}</Alert.Description>
+              </Alert.Content>
+            </Alert.Root>
           )}
 
-          <FormControl isRequired>
-            <FormLabel>Email Address</FormLabel>
+          <Field.Root required>
+            <Field.Label>Email Address</Field.Label>
             <Input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
             />
-          </FormControl>
+          </Field.Root>
 
-          <FormControl isRequired>
-            <FormLabel>Password</FormLabel>
+          <Field.Root required>
+            <Field.Label>Password</Field.Label>
             <Input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
             />
-          </FormControl>
+          </Field.Root>
 
           <Button
             type="submit"
@@ -89,7 +88,7 @@ export default function Login() {
             size="lg"
             width="full"
             mt={4}
-            isLoading={isLoading}
+            loading={isLoading}
           >
             Sign In
           </Button>

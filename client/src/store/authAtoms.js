@@ -24,7 +24,7 @@ export const loginAtom = atom(
   null,
   async (get, set, credentials) => {
     try {
-      const response = await httpClient.post('login/', credentials);
+      const response = await httpClient.post('login', credentials);
       const { access, refresh, userData } = response.data;
 
       // Save token to cookies (which httpClient expects)
@@ -53,7 +53,7 @@ export const registerAtom = atom(
   null,
   async (get, set, registrationData) => {
     try {
-      await httpClient.post('register/', registrationData);
+      await httpClient.post('register', registrationData);
       return { success: true };
     } catch (err) {
       const errorMsg = err.response?.data || 'Registration failed.';

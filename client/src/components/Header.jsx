@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { userAtom, isAuthenticatedAtom, logoutAtom } from '../store/authAtoms';
 import { Box, Flex, Heading, Button, Text, HStack } from '@chakra-ui/react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router';
 
 export default function Header() {
   const isAuthenticated = useAtomValue(isAuthenticatedAtom);

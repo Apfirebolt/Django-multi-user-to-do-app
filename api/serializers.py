@@ -15,7 +15,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         # Custom data 
         data.update({'userData': {
             'email': self.user.email,
-            'username': self.user.username,
             'id': self.user.id
         }})
         return data
@@ -28,7 +27,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'id', 'is_staff', 'password', 'access', 'refresh',)
+        fields = ('user_name', 'email', 'id', 'is_staff', 'password', 'access', 'refresh',)
     
     def get_refresh(self, user):
         refresh = RefreshToken.for_user(user)
@@ -50,4 +49,4 @@ class ListCustomUserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'email', 'is_staff', 'user_bio',)
+        fields = ('id', 'user_name', 'email', 'is_staff', 'user_bio',)
