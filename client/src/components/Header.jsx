@@ -21,7 +21,7 @@ export default function Header() {
         
         {/* Brand / Logo */}
         <Heading as={RouterLink} to="/" size="md" fontFamily="serif" _hover={{ textDecoration: 'none' }}>
-          ProBlog
+          Django React Template
         </Heading>
 
         {/* Navigation Actions */}

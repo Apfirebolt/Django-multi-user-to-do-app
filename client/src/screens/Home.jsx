@@ -22,9 +22,6 @@ export default function Home() {
         <HStack spacing={4} pt={4}>
           {isAuthenticated ? (
             <>
-              <Button as={RouterLink} to="/write" colorScheme="teal" size="lg">
-                Write a Story
-              </Button>
               <Button as={RouterLink} to="/dashboard" variant="outline" size="lg">
                 Go to Dashboard
               </Button>

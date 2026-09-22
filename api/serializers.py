@@ -27,7 +27,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('user_name', 'email', 'id', 'is_staff', 'password', 'access', 'refresh',)
+        fields = ('username', 'email', 'id', 'is_staff', 'password', 'access', 'refresh',)
     
     def get_refresh(self, user):
         refresh = RefreshToken.for_user(user)
@@ -49,4 +49,4 @@ class ListCustomUserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields = ('id', 'user_name', 'email', 'is_staff', 'user_bio',)
+        fields = ('id', 'username', 'email', 'is_staff', 'user_bio',)

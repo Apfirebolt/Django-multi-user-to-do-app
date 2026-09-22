@@ -8,11 +8,13 @@ from accounts.models import CustomUser
 class CustomTokenObtainPairView(TokenObtainPairView):
     # Replace the serializer with your custom
     serializer_class = CustomTokenObtainPairSerializer
+    authentication_classes = []
 
 
 class CreateCustomUserApiView(CreateAPIView):
     serializer_class = CustomUserSerializer
     queryset = CustomUser.objects.all()
+    authentication_classes = []
 
 
 class ChangeSettingsApiView(UpdateAPIView):

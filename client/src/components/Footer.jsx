@@ -9,7 +9,7 @@ export default function Footer() {
         {/* Brand / Copyright */}
         <Stack direction="row" spacing={2} align="center">
           <Text fontWeight="bold" fontFamily="serif" fontSize="lg" color="gray.800">
-            ProBlog
+            Django React Template
           </Text>
           <Text fontSize="sm" color="gray.500">
             &copy; {new Date().getFullYear()} All rights reserved.
