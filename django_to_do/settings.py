@@ -50,8 +50,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     
     'api',
-    'accounts',
-    'tasks'
+    'accounts'
 ]
 
 MIDDLEWARE = [
